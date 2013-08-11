@@ -4,17 +4,12 @@
  */
 package org.waastad.clusterapp.presentation;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.ServletException;
-import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
-import org.omnifaces.util.Faces;
+import org.os890.cdi.ext.scope.api.scope.conversation.ViewAccessScoped;
 import org.waastad.clusterapp.qualifier.Current;
 
 /**
