@@ -20,7 +20,7 @@
   
     <dependencyManagement>
         <dependencies>
-          <!--  <dependency>
+            <dependency>
                 <groupId>org.os890.cdi.ext.scope.modules</groupId>
                 <artifactId>os890-cdi-ext-jsf2-module-impl</artifactId>
                 <version>1.0.5_0.4_01</version>
@@ -57,13 +57,13 @@
                 <artifactId>deltaspike-jsf-module-impl</artifactId>
                 <version>${deltaspike.version}</version>
                 <scope>runtime</scope>
-            </dependency> -->
+            </dependency>
             
-            <dependency>
+            <!--  <dependency>
                 <groupId>org.apache.myfaces.extensions.cdi.bundles</groupId>
                 <artifactId>myfaces-extcdi-bundle-jsf20</artifactId>
                 <version>1.0.5</version>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>org.apache.openejb</groupId>
                 <artifactId>javaee-api</artifactId>
@@ -164,9 +164,36 @@
         <profile>
             <id>skinny-all</id>
             <dependencies>
-                <dependency>
+                <!-- <dependency>
                     <groupId>org.apache.myfaces.extensions.cdi.bundles</groupId>
                     <artifactId>myfaces-extcdi-bundle-jsf20</artifactId>
+                </dependency>-->
+                <dependency>
+                    <groupId>org.os890.cdi.ext.scope.modules</groupId>
+                    <artifactId>os890-cdi-ext-jsf2-module-impl</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.os890.cdi.ext.scope.modules</groupId>
+                    <artifactId>os890-cdi-ext-jsf2-module-api</artifactId>
+                </dependency>
+            
+                <dependency>
+                    <groupId>org.apache.deltaspike.core</groupId>
+                    <artifactId>deltaspike-core-api</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.deltaspike.core</groupId>
+                    <artifactId>deltaspike-core-impl</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.apache.deltaspike.modules</groupId>
+                    <artifactId>deltaspike-jsf-module-api</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.apache.deltaspike.modules</groupId>
+                    <artifactId>deltaspike-jsf-module-impl</artifactId>
                 </dependency>
             </dependencies>
         </profile>
