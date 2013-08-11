@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>ClusterTomeEE</artifactId>
+        <groupId>org.waastad</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <groupId>org.waastad</groupId>
+    <artifactId>ClusterApp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>ClusterApp TomEE Webapp</name>
+    <url>http://tomee.apache.org</url>
+    <build>
+        <finalName>ClusterApp</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/generated-webapp/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/webapp/resources</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>**/*.css</include>
+                                        <include>**/*.js</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.primefaces.extensions</groupId>
+                <artifactId>resources-optimizer-maven-plugin</artifactId>
+                <version>0.6</version>
+                <executions>
+                    <execution>
+                        <id>optimize</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>optimize</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <resourcesSets>
+                        <resourcesSet>
+                            <inputDir>${project.build.directory}/generated-webapp</inputDir>
+                        </resourcesSet>
+                    </resourcesSets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ClusterApp-pomlib</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.myfaces.extensions.cdi.bundles</groupId>
+            <artifactId>myfaces-extcdi-bundle-jsf20</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.openejb</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>     
+        <dependency>
+            <groupId>org.apache.myfaces.core</groupId>
+            <artifactId>myfaces-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.myfaces.core</groupId>
+            <artifactId>myfaces-impl</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ClusterApp-ejb</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    
+    <profiles>
+        <profile>
+            <id>skinny-all</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <classpathPrefix>lib/</classpathPrefix>
+                                </manifest>
+                            </archive>                           
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>skinny-codi-in-web</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <packagingIncludes>WEB-INF/lib/myfaces-extcdi*.jar,**/*.class,**/*.xhtml,**/*.css,**/*.xml,**/*.properties</packagingIncludes>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <classpathPrefix>lib/</classpathPrefix>
+                                </manifest>
+                            </archive>                           
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>node1</id>
+            <build>
+                <!--<directory>instance1</directory>-->
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.openejb.maven</groupId>
+                        <artifactId>tomee-maven-plugin</artifactId>
+                        <version>1.6.0-SNAPSHOT</version>
+                        <configuration>
+                            <tomeeClassifier>plus</tomeeClassifier>
+                            <catalinaBase>${project.build.directory}/instance1</catalinaBase>
+                            <args>-Dopenejb.session-context=http -Dtomee.session-context.wrapper=http</args>
+                            <tomeeHttpPort>8081</tomeeHttpPort>
+                            <tomeeHttpsPort>8443</tomeeHttpsPort>
+                            <tomeeShutdownPort>8015</tomeeShutdownPort>
+                            <tomeeAjpPort>10030</tomeeAjpPort>
+                            <config>src/main/tomee1/conf</config>
+                            <removeDefaultWebapps>false</removeDefaultWebapps>
+                            <quickSession>false</quickSession>
+                            <reloadOnUpdate>true</reloadOnUpdate>
+                            <debug>false</debug>
+                            <debugPort>8000</debugPort>
+                            <libs>
+                                <lib>mysql:mysql-connector-java:5.1.24</lib>
+                                <lib>org.eclipse.persistence:eclipselink:2.4.2</lib>
+                                <lib>c3p0:c3p0:0.9.1.1</lib>
+                                <!-- <lib>org.apache.openejb:openejb-multicast:4.6.0-SNAPSHOT</lib>-->
+                                <lib>remove:openjpa-</lib>
+                            </libs>
+                            <synchronization>
+                                <extensions>
+                                    <extension>.ear</extension>
+                                    <extension>.class</extension>
+                                    <extension>.xhtml</extension>
+                                    <extension>.js</extension>
+                                </extensions>
+                            </synchronization>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>node2</id>
+            <build>
+                <!--<directory>instance2</directory>-->
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.openejb.maven</groupId>
+                        <artifactId>tomee-maven-plugin</artifactId>
+                        <version>1.6.0-SNAPSHOT</version>
+                        <configuration>
+                            <tomeeClassifier>plus</tomeeClassifier>
+                            <catalinaBase>${project.build.directory}/instance2</catalinaBase>
+                            <args>-Dopenejb.session-context=http -Dtomee.session-context.wrapper=http</args>
+                            <tomeeShutdownPort>8016</tomeeShutdownPort>
+                            <tomeeHttpPort>8082</tomeeHttpPort>
+                            <tomeeHttpsPort>8444</tomeeHttpsPort>
+                            <tomeeAjpPort>10040</tomeeAjpPort>
+                            <config>src/main/tomee2/conf</config>
+                            <removeDefaultWebapps>false</removeDefaultWebapps>
+                            <quickSession>false</quickSession>
+                            <reloadOnUpdate>true</reloadOnUpdate>
+                            <libs>
+                                <lib>mysql:mysql-connector-java:5.1.24</lib>
+                                <lib>org.eclipse.persistence:eclipselink:2.4.2</lib>
+                                <lib>c3p0:c3p0:0.9.1.1</lib>
+                                <!-- <lib>org.apache.openejb:openejb-multicast:4.6.0-SNAPSHOT</lib>-->
+                                <lib>remove:openjpa-</lib>
+                            </libs>
+                            <synchronization>
+                                <extensions>
+                                    <extension>.ear</extension>
+                                    <extension>.class</extension>
+                                    <extension>.xhtml</extension>
+                                    <extension>.js</extension>
+                                </extensions>
+                            </synchronization>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+</project>

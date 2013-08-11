@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./WEB-INF/templates/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pou="http://primefaces.org/ui">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <o:enableRestorableView/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="loginForm">
+            <pou:focus />
+            <pou:panel id="loginPanel" header="LoginPanel" styleClass="loginPanel">
+                <h:panelGrid id="panel" columns="3" >
+                    <pou:outputLabel id="usernameLabel" for="username" value="#{msg['Login.userid.label']}:" />
+                    <h:inputText id="username" label="#{msg['Login.userid.label']}" value="#{loginBean.username}" required="true" requiredMessage="#{msg['Validation.required']}"/>
+                    <pou:message id="usernameMsg" for="username"/>
+                    <pou:outputLabel id="passwordLabel" for="password" value="#{msg['Login.password.label']}:" />
+                    <h:inputSecret id="password" label="#{msg['Login.password.label']}" value="#{loginBean.password}" required="true" requiredMessage="#{msg['Validation.required']}" redisplay="true"/>
+                    <pou:message id="passwordMsg" for="password"/>
+                    <h:outputLabel for="remember" value="#{msg['Login.remember']}: "/>
+                    <pou:selectBooleanCheckbox id="remember" label="#{msg['Login.remember']}" value="#{loginBean.rememberme}">
+                        <pou:ajax event="click" process="@this"/>
+                    </pou:selectBooleanCheckbox>
+                    <f:facet name="footer">
+                        <pou:commandButton id="loginButton" value="#{msg['Login.submit.label']}" action="#{loginBean.login}" update="loginPanel :messages :globalmessages"/>
+                    </f:facet>
+                </h:panelGrid>
+            </pou:panel>
+            <pou:blockUI block="loginPanel" trigger="loginButton" />
+        </h:form>
+    </ui:define>
+
+</ui:composition>

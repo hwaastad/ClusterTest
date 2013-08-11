@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <distributable/>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>#{themeSwitcher.theme}</param-value>
+    </context-param>
+    <!-- <context-param>
+        <param-name>org.apache.myfaces.SERIALIZE_STATE_IN_SESSION</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.apache.myfaces.USE_ENCRYPTION</param-name>
+        <param-value>false</param-value>
+    </context-param>-->
+    <!-- Indicate the encryption algorithm used for encrypt the view state. -->
+    <context-param>
+        <param-name>org.apache.myfaces.ALGORITHM</param-name>
+        <!-- See http://java.sun.com/j2se/1.4.2/docs/guide/security/jce/JCERefGuide.html for details -->
+        <param-value>DES</param-value>
+    </context-param>
+
+    <!-- Defines the secret (Base64 encoded) used to initialize the secret key
+    for encryption algorithm. The size of it depends on the algorithm used for encryption -->
+    <context-param>
+        <param-name>org.apache.myfaces.SECRET</param-name>
+        <param-value>knxzKeP4Ra0=</param-value>
+    </context-param>
+
+    <!-- Define the initialization code (Bas64 encoded) that are used to initialize the secret key used
+    on the Message Authentication Code algorithm. The size of it depends on the algorithm used for mac calculation -->
+    <context-param>
+        <param-name>org.apache.myfaces.MAC_SECRET</param-name>
+        <param-value>TSe9cyW/9sETBPBKBwbxLBCDtQ5779ahHYvePPbK2GJtoJ0aWs4oJUs08xqKph4n9W8qoWbxbn1e8hn5c6GEmA==</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>org.apache.myfaces.STRICT_JSF_2_ALLOW_SLASH_LIBRARY_NAME</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>server</param-value>
+    </context-param>
+    
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+</web-app>
