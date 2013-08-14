@@ -89,7 +89,7 @@
                         <configuration>
                             <tomeeClassifier>plus</tomeeClassifier>
                             <catalinaBase>${project.build.directory}/instance1</catalinaBase>
-                            <args>-Dopenejb.session-context=http -Dtomee.session-context.wrapper=http</args>
+                        <!--    <args>-Dopenejb.session-context=http -Dtomee.session-context.wrapper=http</args>-->
                             <tomeeHttpPort>8081</tomeeHttpPort>
                             <tomeeHttpsPort>8443</tomeeHttpsPort>
                             <tomeeShutdownPort>8015</tomeeShutdownPort>
@@ -132,7 +132,6 @@
                         <configuration>
                             <tomeeClassifier>plus</tomeeClassifier>
                             <catalinaBase>${project.build.directory}/instance2</catalinaBase>
-                            <args>-Dopenejb.session-context=http -Dtomee.session-context.wrapper=http</args>
                             <tomeeShutdownPort>8016</tomeeShutdownPort>
                             <tomeeHttpPort>8082</tomeeHttpPort>
                             <tomeeHttpsPort>8444</tomeeHttpsPort>
@@ -145,7 +144,6 @@
                                 <lib>mysql:mysql-connector-java:5.1.24</lib>
                                 <lib>org.eclipse.persistence:eclipselink:2.4.2</lib>
                                 <lib>c3p0:c3p0:0.9.1.1</lib>
-                                <!-- <lib>org.apache.openejb:openejb-multicast:4.6.0-SNAPSHOT</lib>-->
                                 <lib>remove:openjpa-</lib>
                             </libs>
                             <synchronization>
