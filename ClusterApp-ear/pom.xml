@@ -24,7 +24,8 @@
             <version>${project.version}</version>
             <scope>compile</scope>
             <type>war</type>
-        </dependency>     
+        </dependency>
+         
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>apache-tomee</artifactId>
@@ -36,6 +37,12 @@
             <artifactId>ClusterApp-ejb</artifactId>
             <version>${project.version}</version>
             <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ClusterApp-lib</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <build>
@@ -62,6 +69,10 @@
                             <groupId>${project.groupId}</groupId>
                             <artifactId>ClusterApp-ejb</artifactId>
                         </ejbModule>
+                        <jarModule>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>ClusterApp-lib</artifactId>
+                        </jarModule>
                     </modules>
                 </configuration>
             </plugin>
@@ -89,7 +100,7 @@
                         <configuration>
                             <tomeeClassifier>plus</tomeeClassifier>
                             <catalinaBase>${project.build.directory}/instance1</catalinaBase>
-                        <!--    <args>-Dopenejb.session-context=http -Dtomee.session-context.wrapper=http</args>-->
+                            <!--    <args>-Dopenejb.session-context=http -Dtomee.session-context.wrapper=http</args>-->
                             <tomeeHttpPort>8081</tomeeHttpPort>
                             <tomeeHttpsPort>8443</tomeeHttpsPort>
                             <tomeeShutdownPort>8015</tomeeShutdownPort>

@@ -12,7 +12,8 @@
         <module>ClusterApp-ear</module>
         <module>ClusterApp-ejb</module>
         <module>ClusterApp-pomlib</module>
-    </modules>
+    <module>ClusterApp-lib</module>
+  </modules>
     
     <properties>
         <deltaspike.version>0.4</deltaspike.version>
