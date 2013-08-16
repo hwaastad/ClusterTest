@@ -15,7 +15,7 @@ import javax.inject.Qualifier;
 
 /**
  *
- * @author Helge Waastad <helge.waastad@datametrix.no>
+ * @author Helge Waastad <helge.waastad@waastad.org>
  */
 @Qualifier
 @Retention(RUNTIME)

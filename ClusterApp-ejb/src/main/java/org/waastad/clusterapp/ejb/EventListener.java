@@ -11,7 +11,7 @@ import org.waastad.qualifier.DbLog;
 
 /**
  *
- * @author Helge Waastad <helge.waastad@datametrix.no>
+ * @author Helge Waastad <helge.waastad@waastad.org>
  */
 @Stateless
 @Asynchronous
