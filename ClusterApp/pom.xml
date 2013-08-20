@@ -127,6 +127,7 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>ClusterApp-lib</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     

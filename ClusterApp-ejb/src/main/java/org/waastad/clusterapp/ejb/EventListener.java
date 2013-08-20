@@ -21,4 +21,8 @@ public class EventListener {
         System.out.println("We Got Message: " + message);
     }
     
+//     public void processSyslogText(@Observes @SysLog String message) {
+//        System.out.println("We Got Message: " + message);
+//    }
+    
 }

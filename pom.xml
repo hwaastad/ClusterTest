@@ -12,7 +12,7 @@
         <module>ClusterApp-ear</module>
         <module>ClusterApp-ejb</module>
         <module>ClusterApp-pomlib</module>
-    <module>ClusterApp-lib</module>
+        <module>ClusterApp-lib</module>
   </modules>
     
     <properties>

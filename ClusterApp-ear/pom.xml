@@ -25,7 +25,6 @@
             <scope>compile</scope>
             <type>war</type>
         </dependency>
-         
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>apache-tomee</artifactId>
@@ -60,19 +59,19 @@
                         ClusterApp EAR Sample
                     </description>
                     <modules>
+                        <jarModule>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>ClusterApp-lib</artifactId>
+                        </jarModule>
+                        <ejbModule>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>ClusterApp-ejb</artifactId>
+                        </ejbModule>
                         <webModule>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>ClusterApp</artifactId>
                             <contextRoot>/ClusterApp</contextRoot>
                         </webModule>
-                        <ejbModule>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>ClusterApp-ejb</artifactId>
-                        </ejbModule>
-                        <jarModule>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>ClusterApp-lib</artifactId>
-                        </jarModule>
                     </modules>
                 </configuration>
             </plugin>
