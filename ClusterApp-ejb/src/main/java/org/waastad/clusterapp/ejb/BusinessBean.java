@@ -6,6 +6,8 @@ package org.waastad.clusterapp.ejb;
 
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 /**
  *
@@ -15,7 +17,13 @@ import javax.ejb.LocalBean;
 @LocalBean
 public class BusinessBean {
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public String sayHello(String name) {
+        methodB();
         return "Hello " + name;
+    }
+    @TransactionAttribute(TransactionAttributeType.MANDATORY)
+    public void methodB(){
+        System.out.println("MethodB");
     }
 }
