@@ -4,22 +4,17 @@
  */
 package org.waastad.clusterapp.presentation;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.enterprise.event.Event;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.ServletException;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
-import org.omnifaces.util.Faces;
 import org.waastad.clusterapp.ejb.BusinessBean;
+import org.waastad.clusterapp.ejb.BusinessBeanRemote;
+import org.waastad.clusterapp.qualifier.BusinessQualifier;
 import org.waastad.clusterapp.qualifier.Current;
 import org.waastad.qualifier.DbLog;
 
@@ -37,8 +32,9 @@ public class ViewBean implements Serializable {
     @Inject
     @DbLog
     Event<String> log;
-    @EJB
-    private BusinessBean businessBean;
+    @Inject
+    @BusinessQualifier
+    private BusinessBeanRemote businessBean;
     private static final long serialVersionUID = -3537022616965685764L;
     private String viewBeanName;
 

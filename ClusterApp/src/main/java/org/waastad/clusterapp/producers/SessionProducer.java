@@ -4,12 +4,10 @@
  */
 package org.waastad.clusterapp.producers;
 
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.New;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
-import org.waastad.clusterapp.presentation.LoginBean;
 import org.waastad.clusterapp.presentation.SessionController;
 import org.waastad.clusterapp.qualifier.Current;
 

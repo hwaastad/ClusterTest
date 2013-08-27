@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
@@ -65,8 +66,9 @@ public class LoginBean {
     }
 
     public void logout() {
-        log.fire("LOGOUT: The User is: " + username);
+        log.fire("LOGOUT: The User is: " + sessionController.getUserName());
         Faces.invalidateSession();
+        log.fire("LOGOUT-After: The User is: " + sessionController.getUserName());
         try {
             Faces.redirect(Faces.getRequestBaseURL() + "/", "faces-redirect=true");
         } catch (IOException ex) {

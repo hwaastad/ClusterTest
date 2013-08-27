@@ -5,12 +5,13 @@
 package org.waastad.clusterapp.presentation;
 
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /**
  *
  * @author Helge Waastad <helge.waastad@waastad.org>
  */
-
 public class SessionController implements Serializable {
 
     private static final long serialVersionUID = 457281355940188534L;
@@ -24,6 +25,17 @@ public class SessionController implements Serializable {
     /**
      * Creates a new instance of SessionController
      */
+    
+    @PostConstruct
+    public void init(){
+        System.out.println("INIT SessionController");
+    }
+    
+    @PreDestroy
+    public void destroy(){
+        System.out.println("Destroy SessionController");
+    }
+    
     public SessionController() {
     }
 
